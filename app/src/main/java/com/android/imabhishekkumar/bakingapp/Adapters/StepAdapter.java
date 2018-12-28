@@ -22,7 +22,7 @@ import java.util.List;
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     private Context context;
     private List<Step> stepList;
-    private ClickListener mClickListener;
+    private ClickListener clickListener;
 
     public StepAdapter(Context context, List<Step> data) {
         this.context = context;
@@ -49,7 +49,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mClickListener.onClick(view.getContext(), currentStep.getId(),
+                clickListener.onClick(view.getContext(), currentStep.getId(),
                         currentStep.getDescription(),
                         currentStep.getVideoURL(),
                         currentStep.getThumbnailURL());
@@ -58,8 +58,8 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     }
 
-    public void setOnClick(ClickListener mClickListener) {
-        this.mClickListener = mClickListener;
+    public void setOnClick(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
             stepsTV = itemView.findViewById(R.id.stepsTV);
             cardView = itemView.findViewById(R.id.stepsCV);
-            itemView.setOnClickListener(new View.OnClickListener() {
+      /*     itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //int pos = getAdapterPosition();
@@ -88,11 +88,11 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
                     bundle.putString(Constants.BUNDLE_STEPS_VIDEO_URL,stepList.get(pos).getVideoURL());
                     bundle.putString(Constants.BUNDLE_STEPS_THUMB_URL,stepList.get(pos).getThumbnailURL());
                     DetailsFragement detailsFragement = new DetailsFragement();
-                    detailsFragement.setArguments(bundle);*/
+                    detailsFragement.setArguments(bundle);
                     // Toast.makeText(context,stepList.get(pos).getDescription(),Toast.LENGTH_SHORT).show();
 
                 }
-            });
+            });*/
         }
     }
 }

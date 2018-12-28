@@ -75,8 +75,7 @@ public class DetailsFragement extends Fragment implements ClickListener {
         stepRecyclerView.setLayoutManager(linearLayoutManager);
         stepAdapter = new StepAdapter(getActivity(), stepList);
         stepRecyclerView.setAdapter(stepAdapter);
-
-
+        stepAdapter.setOnClick(this);
         return rootView;
     }
 
