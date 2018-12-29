@@ -14,4 +14,5 @@ public class Constants {
     public static final String BUNDLE_STEPS_VIDEO_URL = "stepVideoURL";
     public static final String BUNDLE_STEPS_THUMB_URL = "stepThumbnailURL";
     public static final String KEY_PANE = "twoPane";
+    public static final String PLAYER_POS = "playerPosition" ;
 }
