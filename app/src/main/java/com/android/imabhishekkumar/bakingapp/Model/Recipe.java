@@ -1,5 +1,7 @@
 package com.android.imabhishekkumar.bakingapp.Model;
 
+import com.android.imabhishekkumar.bakingapp.R;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,17 +13,28 @@ public class Recipe implements Serializable {
     public List<Step> steps;
     public int servings;
     public String image;
-
-    public Recipe() {
+    private int cakeImage;
+    public Recipe(){
+        cakeImage = R.drawable.image;
     }
 
-    public Recipe(int id, String name, List<Ingredient> ingredients, List<Step> steps, int servings, String image) {
+    public int getCakeImage() {
+        return cakeImage;
+    }
+
+    public void setCakeImage(int cakeImage) {
+        this.cakeImage = cakeImage;
+    }
+
+
+    public Recipe(int id, String name, List<Ingredient> ingredients, List<Step> steps, int servings, String image, int cakeImage) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.steps = steps;
         this.servings = servings;
         this.image = image;
+        this.cakeImage=cakeImage;
     }
 
     public int getId() {

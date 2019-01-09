@@ -17,9 +17,7 @@ import com.android.imabhishekkumar.bakingapp.Model.Step;
 import com.android.imabhishekkumar.bakingapp.R;
 import com.android.imabhishekkumar.bakingapp.Utils.Constants;
 import com.android.imabhishekkumar.bakingapp.activities.DetailsActivity;
-import com.android.imabhishekkumar.bakingapp.activities.DetailsFragement;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
@@ -56,9 +54,9 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Recipe currentRecipe = recipesList.get(i);
         viewHolder.textView.setText(currentRecipe.getName());
-        Picasso.get()
-                .load(Constants.IMAGE_URL)
-                .into(viewHolder.imageView);
+        viewHolder.imageView.setImageResource(
+                currentRecipe.getCakeImage());
+
     }
 
     @Override
