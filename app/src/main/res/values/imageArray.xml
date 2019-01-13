@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="food_image_array">
+        <item>@drawable/nutellapie</item>
+        <item>@drawable/brownies</item>
+        <item>@drawable/yellowcake</item>
+        <item>@drawable/cheesecake</item>
+    </integer-array>
+
+</resources>
