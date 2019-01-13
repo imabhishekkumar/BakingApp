@@ -32,7 +32,7 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     private Gson gson;
     public RecipeRecyclerAdapter(Context context, List<Recipe> data) {
         this.context = context;
-        mLayoutInflator = LayoutInflater.from(context);
+//        mLayoutInflator = LayoutInflater.from(context);
         recipesList = data;
         sharedPreferences = context.getSharedPreferences(Constants.SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);

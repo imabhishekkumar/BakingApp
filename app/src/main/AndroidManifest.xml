@@ -25,10 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DetailsActivity" />
-        <activity android:name=".activities.VideoActivity"
-            />
+        <activity android:name=".activities.DetailsActivity"
+            android:configChanges="keyboardHidden|orientation"
 
+             />
+        <activity android:name=".activities.VideoActivity"
+            android:configChanges="keyboardHidden|orientation"
+
+             />
         <receiver android:name=".RecipeWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

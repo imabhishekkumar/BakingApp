@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        final View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 
         mRecyclerView = view.findViewById(R.id.main_recyclerView);
@@ -92,7 +92,7 @@ public class MainFragment extends Fragment {
                         i++;
 
                     }
-                    recipeRecyclerAdapter = new RecipeRecyclerAdapter(getContext(), recipeArrayList);
+                    recipeRecyclerAdapter = new RecipeRecyclerAdapter(view.getContext(), recipeArrayList);
                     mRecyclerView.setAdapter(recipeRecyclerAdapter);
                     recipeRecyclerAdapter.notifyDataSetChanged();
 
