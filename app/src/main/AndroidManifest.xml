@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.DetailsActivity"
-            android:configChanges="keyboardHidden|orientation"
+
 
              />
         <activity android:name=".activities.VideoActivity"
-            android:configChanges="keyboardHidden|orientation"
+
 
              />
         <receiver android:name=".RecipeWidgetProvider">
