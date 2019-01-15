@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,6 +48,9 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
     String description;
     String url;
     String thumbnailImage;
+    ImageButton buttonPrev;
+    ImageButton buttonNext;
+
     long positionPlayer = 0;
     boolean mTwoPane;
     boolean playWhenReady;
@@ -68,13 +72,15 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
             url = bundle.getString(Constants.BUNDLE_STEPS_VIDEO_URL);
             thumbnailImage = bundle.getString(Constants.BUNDLE_STEPS_THUMB_URL);
             mTwoPane = bundle.getBoolean(Constants.KEY_TWO_PANE);
+
+
         }
         if (savedInstanceState != null) {
             playWhenReady = savedInstanceState.getBoolean(Constants.KEY_PLAY_WHEN_READY);
             positionPlayer = savedInstanceState.getLong(Constants.PLAYER_POS);
             url = savedInstanceState.getString(Constants.BUNDLE_STEPS_VIDEO_URL);
         }
-        Log.d("OnCreate", " ");
+       
     }
 
     @Nullable
@@ -84,7 +90,25 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
         stepDescTV = rootView.findViewById(R.id.step_descriptionTV);
         placeholderIV = rootView.findViewById(R.id.no_video_image);
         simpleExoPlayerView = rootView.findViewById(R.id.exo_playerView);
+        buttonPrev = rootView.findViewById(R.id.button_prev);
+        buttonNext = rootView.findViewById(R.id.button_next);
+
         playWhenReady = true;
+
+        buttonPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
 
         if (url != null) {
             if (url.equals("")) {
@@ -109,9 +133,6 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
 
 
         }
-        Log.d("Player OnCreateView", " ");
-        Log.d("Player Position", String.valueOf(positionPlayer));
-        Log.d("PlayerState CreateView", String.valueOf(playWhenReady));
 
 
         return rootView;
@@ -134,40 +155,22 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
     private void checkAndSetLayout() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             stepDescTV.setVisibility(View.VISIBLE);
+            buttonNext.setVisibility(View.VISIBLE);
+            buttonPrev.setVisibility(View.VISIBLE);
             stepDescTV.setText(description);
 //            positionPlayer= simpleExoPlayer.getCurrentPosition();
             //simpleExoPlayer.seekTo(positionPlayer);
         } else if ((getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
             stepDescTV.setVisibility(View.GONE);
+            buttonNext.setVisibility(View.GONE);
+            buttonPrev.setVisibility(View.GONE);
             hideSystemUI();
-            //        positionPlayer= simpleExoPlayer.getCurrentPosition();
-            //         simpleExoPlayer.seekTo(positionPlayer);
+
             simpleExoPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
             simpleExoPlayerView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
     }
 
-    /*  @Override
-       public void onConfigurationChanged(Configuration newConfig) {
-           super.onConfigurationChanged(newConfig);
-          Log.d("PlayerOnConfig,", "");
-           // Checks the orientation of the screen
-          checkAndSetLayout();
-        /* if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-               positionPlayer= simpleExoPlayer.getCurrentPosition();
-               stepDescTV.setVisibility(View.GONE);
-               hideSystemUI();
-               simpleExoPlayer.seekTo(positionPlayer);
-               simpleExoPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-               simpleExoPlayerView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
-           } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-              positionPlayer= simpleExoPlayer.getCurrentPosition();
-              simpleExoPlayer.seekTo(positionPlayer);
-               stepDescTV.setVisibility(View.VISIBLE);
-               stepDescTV.setText(description);
-           }
-       }
-   */
     private void hideSystemUI() {
         if (((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
@@ -252,14 +255,10 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
         if (mediaSessionCompat != null) {
             mediaSessionCompat.setActive(false);
         }
-        Log.d("Player OnDestroy", " ");
-        Log.d("Player Position", String.valueOf(positionPlayer));
-        Log.d("PlayerState Destroy", String.valueOf(playWhenReady));
     }
 
     private void releasePlayer() {
         if (simpleExoPlayer != null) {
-            //positionPlayer=simpleExoPlayer.getCurrentPosition();
             simpleExoPlayer.stop();
             simpleExoPlayer.release();
             simpleExoPlayer = null;
@@ -293,12 +292,9 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("Player OnPause", " ");
         if (simpleExoPlayer != null) {
             positionPlayer = simpleExoPlayer.getCurrentPosition();
             playWhenReady = simpleExoPlayer.getPlayWhenReady();
-            Log.d("PlayerPosition Pause", String.valueOf(positionPlayer));
-            Log.d("PlayerState Pause", String.valueOf(playWhenReady));
             releasePlayer();
         }
     }
@@ -306,9 +302,8 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Player OnResume", " ");
+
         if (simpleExoPlayer != null) {
-            //checkAndSetLayout();
             simpleExoPlayer.setPlayWhenReady(playWhenReady);
             simpleExoPlayer.seekTo(positionPlayer);
 
@@ -318,10 +313,6 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
             simpleExoPlayer.setPlayWhenReady(playWhenReady);
             simpleExoPlayer.seekTo(positionPlayer);
         }
-        Log.d("Player Position", String.valueOf(positionPlayer));
-        Log.d("PlayerState Resume", String.valueOf(playWhenReady));
-
-
     }
 
 

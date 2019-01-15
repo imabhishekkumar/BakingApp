@@ -17,4 +17,5 @@ public class Constants {
     public static final String KEY_PLAY_WHEN_READY="playWhenReady";
     public static final String KEY_VISIBILITY_EXO_PLAYER = "exoPlayerVisibility";
     public static final String KEY_VISIBILITY_PLACEHOLDER = "placeHolderVisibility";
+    public static final String STEP_SIZE = "stepSize";
 }

@@ -48,7 +48,8 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
                 clickListener.onClick(view.getContext(), currentStep.getId(),
                         currentStep.getDescription(),
                         currentStep.getVideoURL(),
-                        currentStep.getThumbnailURL());
+                        currentStep.getThumbnailURL(),
+                        stepList.size());
             }
         });
 

@@ -13,13 +13,18 @@ public class VideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
-        VideoFragment videoFragment = new VideoFragment();
-        bundle = new Bundle();
-        bundle = getIntent().getExtras();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        videoFragment.setArguments(bundle);
-        fragmentManager.beginTransaction()
-                .replace(R.id.video_frame_layout, videoFragment).commit();
-        
+        if (savedInstanceState==null) {
+            VideoFragment videoFragment = new VideoFragment();
+            bundle = new Bundle();
+            bundle = getIntent().getExtras();
+
+            //Only init when the bool is false and fragments need to be transacted
+            //for preserving the ExoPlayer instance so that it resumes properly
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            videoFragment.setArguments(bundle);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.video_frame_layout, videoFragment).commit();
+        }
     }
 }

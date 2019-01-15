@@ -84,7 +84,7 @@ public class DetailsFragement extends Fragment implements ClickListener {
 
 
     @Override
-    public void onClick(Context context, Integer id, String description, String url, String thumbnailUrl) {
+    public void onClick(Context context, Integer id, String description, String url, String thumbnailUrl, int stepSize) {
         if (twoPane) {
             Bundle bundle = new Bundle();
             bundle.putInt(Constants.BUNDLE_STEPS_ID, id);
@@ -92,6 +92,7 @@ public class DetailsFragement extends Fragment implements ClickListener {
             bundle.putString(Constants.BUNDLE_STEPS_VIDEO_URL, url);
             bundle.putBoolean(Constants.KEY_TWO_PANE, twoPane);
             bundle.putString(Constants.BUNDLE_STEPS_THUMB_URL, thumbnailUrl);
+            bundle.putInt(Constants.STEP_SIZE,stepSize);
             VideoFragment videoFragment = new VideoFragment();
             videoFragment.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction()
@@ -102,6 +103,7 @@ public class DetailsFragement extends Fragment implements ClickListener {
             intent.putExtra(Constants.BUNDLE_STEPS_DESC, description);
             intent.putExtra(Constants.BUNDLE_STEPS_VIDEO_URL, url);
             intent.putExtra(Constants.BUNDLE_STEPS_THUMB_URL, thumbnailUrl);
+            intent.putExtra(Constants.STEP_SIZE,stepSize);
             context.startActivity(intent);
         }
     }
