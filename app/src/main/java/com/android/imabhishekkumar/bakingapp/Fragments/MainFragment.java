@@ -27,6 +27,8 @@ import com.android.imabhishekkumar.bakingapp.activities.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,10 +39,12 @@ public class MainFragment extends Fragment {
     public MainFragment() {
 
     }
+
     SimpleIdlingResource idlingResource;
     private TypedArray cakeImage;
     private static boolean mTwoPane;
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.main_recyclerView)
+    RecyclerView mRecyclerView;
     private RecipeRecyclerAdapter recipeRecyclerAdapter;
     final List<Recipe> recipeArrayList = new ArrayList<>();
 
@@ -59,7 +63,7 @@ public class MainFragment extends Fragment {
         if (idlingResource != null) {
             idlingResource.setIdleState(false);
         }
-        mRecyclerView = view.findViewById(R.id.main_recyclerView);
+        ButterKnife.bind(this, view);
         mRecyclerView.setHasFixedSize(true);
         cakeImage = getResources().
                 obtainTypedArray(R.array.food_image_array);
@@ -67,11 +71,11 @@ public class MainFragment extends Fragment {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
             mRecyclerView.setLayoutManager(gridLayoutManager);
             idlingResource.setIdleState(true);
-        } else if(mTwoPane) {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3 );
+        } else if (mTwoPane) {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
             mRecyclerView.setLayoutManager(gridLayoutManager);
-            idlingResource.setIdleState(true);        }
-        else{
+            idlingResource.setIdleState(true);
+        } else {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
             mRecyclerView.setLayoutManager(gridLayoutManager);
             idlingResource.setIdleState(true);

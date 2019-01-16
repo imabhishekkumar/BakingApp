@@ -1,5 +1,6 @@
 package com.android.imabhishekkumar.bakingapp.Fragments;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,11 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.imabhishekkumar.bakingapp.Model.Step;
 import com.android.imabhishekkumar.bakingapp.R;
+import com.android.imabhishekkumar.bakingapp.Utils.ClickListener;
 import com.android.imabhishekkumar.bakingapp.Utils.Constants;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -38,19 +42,15 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
     public static final String TAG = VideoFragment.class.getSimpleName();
-    TextView stepDescTV;
-    ImageView placeholderIV;
-    SimpleExoPlayerView simpleExoPlayerView;
-    SimpleExoPlayer simpleExoPlayer;
     String description;
     String url;
     String thumbnailImage;
-    ImageButton buttonPrev;
-    ImageButton buttonNext;
-
     long positionPlayer = 0;
     boolean mTwoPane;
     boolean playWhenReady;
@@ -58,15 +58,26 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
     private MediaSessionCompat mediaSessionCompat;
     private PlaybackStateCompat.Builder playbackBuilder;
 
+    @BindView(R.id.step_descriptionTV)
+    TextView stepDescTV;
+    @BindView(R.id.no_video_image)
+    ImageView placeholderIV;
+    @BindView(R.id.exo_playerView)
+    SimpleExoPlayerView simpleExoPlayerView;
+
+    SimpleExoPlayer simpleExoPlayer;
+
 
     public VideoFragment() {
 
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
+
         if (bundle != null) {
             description = bundle.getString(Constants.BUNDLE_STEPS_DESC);
             url = bundle.getString(Constants.BUNDLE_STEPS_VIDEO_URL);
@@ -80,35 +91,18 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
             positionPlayer = savedInstanceState.getLong(Constants.PLAYER_POS);
             url = savedInstanceState.getString(Constants.BUNDLE_STEPS_VIDEO_URL);
         }
-       
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.video_row, container, false);
-        stepDescTV = rootView.findViewById(R.id.step_descriptionTV);
-        placeholderIV = rootView.findViewById(R.id.no_video_image);
-        simpleExoPlayerView = rootView.findViewById(R.id.exo_playerView);
-        buttonPrev = rootView.findViewById(R.id.button_prev);
-        buttonNext = rootView.findViewById(R.id.button_next);
+
+        ButterKnife.bind(this, rootView);
 
         playWhenReady = true;
 
-        buttonPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-            }
-        });
 
         if (url != null) {
             if (url.equals("")) {
@@ -138,6 +132,7 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
         return rootView;
     }
 
+
     private void initializeMedia() {
         mediaSessionCompat = new MediaSessionCompat(getActivity(), TAG);
         mediaSessionCompat.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
@@ -152,18 +147,16 @@ public class VideoFragment extends Fragment implements ExoPlayer.EventListener {
         mediaSessionCompat.setActive(true);
     }
 
+
     private void checkAndSetLayout() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             stepDescTV.setVisibility(View.VISIBLE);
-            buttonNext.setVisibility(View.VISIBLE);
-            buttonPrev.setVisibility(View.VISIBLE);
+
             stepDescTV.setText(description);
-//            positionPlayer= simpleExoPlayer.getCurrentPosition();
-            //simpleExoPlayer.seekTo(positionPlayer);
+
         } else if ((getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
             stepDescTV.setVisibility(View.GONE);
-            buttonNext.setVisibility(View.GONE);
-            buttonPrev.setVisibility(View.GONE);
+
             hideSystemUI();
 
             simpleExoPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;

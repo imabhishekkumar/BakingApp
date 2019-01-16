@@ -22,6 +22,9 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAdapter.ViewHolder> {
     private List<Recipe> recipesList;
     private LayoutInflater mLayoutInflator;
@@ -30,6 +33,7 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     private List<Step> stepList;
     private SharedPreferences sharedPreferences;
     private Gson gson;
+
     public RecipeRecyclerAdapter(Context context, List<Recipe> data) {
         this.context = context;
 //        mLayoutInflator = LayoutInflater.from(context);
@@ -65,22 +69,22 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.recipeImage)
+        ImageView imageView;
+        @BindView(R.id.recipeName)
+        TextView textView;
 
-        public ImageView imageView;
-        public TextView textView;
-
-        public ViewHolder(@NonNull final View itemView, Context ctx) {
+        ViewHolder(@NonNull final View itemView, Context ctx) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.recipeImage);
-            textView= itemView.findViewById(R.id.recipeName);
-            context=ctx;
+            context = ctx;
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
                     ingredientList = recipesList.get(pos).getIngredients();
                     stepList = recipesList.get(pos).getSteps();
-                    Intent intent = new Intent(context,DetailsActivity.class);
+                    Intent intent = new Intent(context, DetailsActivity.class);
                     gson = new Gson();
                     String ingredientJson = gson.toJson(ingredientList);
                     String stepJson = gson.toJson(stepList);

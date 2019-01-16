@@ -7,6 +7,7 @@ import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import com.android.imabhishekkumar.bakingapp.Fragments.MainFragment;
 
 import com.android.imabhishekkumar.bakingapp.R;
@@ -14,8 +15,8 @@ import com.android.imabhishekkumar.bakingapp.R;
 import com.android.imabhishekkumar.bakingapp.Utils.SimpleIdlingResource;
 
 
-
 public class MainActivity extends AppCompatActivity {
+
 
     private static boolean mTwoPane;
     @Nullable
@@ -34,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if (findViewById(R.id.tab_list_recipe_container) != null){
+        if (findViewById(R.id.tab_list_recipe_container) != null) {
             mTwoPane = true;
             MainFragment fragment = new MainFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.tab_list_recipe_container, fragment)
                     .commit();
-        }
-
-        else{
+        } else {
             mTwoPane = false;
             MainFragment fragment = new MainFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -57,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         getIdlingResource();
     }
-
-
 
 
     public static boolean getNoPane() {

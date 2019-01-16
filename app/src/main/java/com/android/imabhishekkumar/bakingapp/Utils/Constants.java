@@ -13,9 +13,7 @@ public class Constants {
     public static final String BUNDLE_STEPS_VIDEO_URL = "stepVideoURL";
     public static final String BUNDLE_STEPS_THUMB_URL = "stepThumbnailURL";
     public static final String KEY_TWO_PANE = "twoPane";
-    public static final String PLAYER_POS = "playerPosition" ;
-    public static final String KEY_PLAY_WHEN_READY="playWhenReady";
-    public static final String KEY_VISIBILITY_EXO_PLAYER = "exoPlayerVisibility";
-    public static final String KEY_VISIBILITY_PLACEHOLDER = "placeHolderVisibility";
+    public static final String PLAYER_POS = "playerPosition";
+    public static final String KEY_PLAY_WHEN_READY = "playWhenReady";
     public static final String STEP_SIZE = "stepSize";
 }

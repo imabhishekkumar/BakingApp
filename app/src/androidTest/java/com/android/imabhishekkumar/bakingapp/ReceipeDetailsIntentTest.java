@@ -35,7 +35,7 @@ import static org.hamcrest.core.IsNot.not;
 @RunWith(AndroidJUnit4.class)
 public class ReceipeDetailsIntentTest {
 
-    private static final String RECIPE_ITEM_BROWNIE = "Brownies";
+    private static final String RECIPE_ITEM_NUTELLA_PIE = "Nutella Pie";
 
     @Rule
     public IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule<>(
@@ -58,7 +58,7 @@ public class ReceipeDetailsIntentTest {
     public void clickRecipe_LaunchDetailActivityIntent() {
         onView(withId(R.id.main_recyclerView))
                 .perform(RecyclerViewActions.actionOnItem(
-                        hasDescendant(withText(RECIPE_ITEM_BROWNIE)), click()));
+                        hasDescendant(withText(RECIPE_ITEM_NUTELLA_PIE)), click()));
         Context targetContext = InstrumentationRegistry.getTargetContext();
         targetContext.getResources().getBoolean(R.bool.tab);
         Boolean isTabletUsed = targetContext.getResources().getBoolean(R.bool.tab);

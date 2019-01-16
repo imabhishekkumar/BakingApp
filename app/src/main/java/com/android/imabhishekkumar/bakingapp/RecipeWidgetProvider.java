@@ -1,24 +1,28 @@
 package com.android.imabhishekkumar.bakingapp;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
 import com.android.imabhishekkumar.bakingapp.Model.Ingredient;
 import com.android.imabhishekkumar.bakingapp.Model.Recipe;
 import com.android.imabhishekkumar.bakingapp.Utils.Constants;
+import com.android.imabhishekkumar.bakingapp.activities.DetailsActivity;
+import com.android.imabhishekkumar.bakingapp.activities.MainActivity;
 import com.google.gson.Gson;
 
 import java.util.List;
-
 
 
 /**
  * Implementation of App Widget functionality.
  */
 public class RecipeWidgetProvider extends AppWidgetProvider {
+
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId, String recipeName, List<Ingredient> ingredientList) {
@@ -43,7 +47,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
-         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.SHARED_PREFERENCES,
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         String result = sharedPreferences.getString(Constants.WIDGET_RESULT, null);
         Gson gson = new Gson();

@@ -15,6 +15,9 @@ import com.android.imabhishekkumar.bakingapp.Utils.ClickListener;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     private Context context;
     private List<Step> stepList;
@@ -65,31 +68,15 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.stepsTV)
         TextView stepsTV;
+        @BindView(R.id.stepsCV)
         CardView cardView;
 
         public ViewHolder(@NonNull View itemView, Context ctx) {
             super(itemView);
             context = ctx;
-
-            stepsTV = itemView.findViewById(R.id.stepsTV);
-            cardView = itemView.findViewById(R.id.stepsCV);
-      /*     itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //int pos = getAdapterPosition();
-
-                   /* Bundle bundle = new Bundle();
-                    bundle.putInt(Constants.BUNDLE_STEPS_ID,stepList.get(pos).getId());
-                    bundle.putString(Constants.BUNDLE_STEPS_DESC,stepList.get(pos).getDescription());
-                    bundle.putString(Constants.BUNDLE_STEPS_VIDEO_URL,stepList.get(pos).getVideoURL());
-                    bundle.putString(Constants.BUNDLE_STEPS_THUMB_URL,stepList.get(pos).getThumbnailURL());
-                    DetailsFragement detailsFragement = new DetailsFragement();
-                    detailsFragement.setArguments(bundle);
-                    // Toast.makeText(context,stepList.get(pos).getDescription(),Toast.LENGTH_SHORT).show();
-
-                }
-            });*/
+            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -14,7 +14,8 @@ public class Recipe implements Serializable {
     public int servings;
     public String image;
     private int cakeImage;
-    public Recipe(){
+
+    public Recipe() {
         cakeImage = R.drawable.image;
     }
 
@@ -34,7 +35,7 @@ public class Recipe implements Serializable {
         this.steps = steps;
         this.servings = servings;
         this.image = image;
-        this.cakeImage=cakeImage;
+        this.cakeImage = cakeImage;
     }
 
     public int getId() {
