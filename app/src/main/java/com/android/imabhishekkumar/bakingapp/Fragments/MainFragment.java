@@ -21,6 +21,7 @@ import com.android.imabhishekkumar.bakingapp.Api.Api;
 import com.android.imabhishekkumar.bakingapp.Model.Recipe;
 import com.android.imabhishekkumar.bakingapp.R;
 import com.android.imabhishekkumar.bakingapp.Utils.Constants;
+import com.android.imabhishekkumar.bakingapp.Utils.SimpleIdlingResource;
 import com.android.imabhishekkumar.bakingapp.activities.MainActivity;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class MainFragment extends Fragment {
     public MainFragment() {
 
     }
-
+    SimpleIdlingResource idlingResource;
     private TypedArray cakeImage;
     private static boolean mTwoPane;
     private RecyclerView mRecyclerView;
@@ -54,7 +55,10 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-
+        idlingResource = (SimpleIdlingResource) ((MainActivity) getActivity()).getIdlingResource();
+        if (idlingResource != null) {
+            idlingResource.setIdleState(false);
+        }
         mRecyclerView = view.findViewById(R.id.main_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         cakeImage = getResources().
@@ -62,13 +66,15 @@ public class MainFragment extends Fragment {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
             mRecyclerView.setLayoutManager(gridLayoutManager);
+            idlingResource.setIdleState(true);
         } else if(mTwoPane) {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3 );
             mRecyclerView.setLayoutManager(gridLayoutManager);
-        }
+            idlingResource.setIdleState(true);        }
         else{
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
             mRecyclerView.setLayoutManager(gridLayoutManager);
+            idlingResource.setIdleState(true);
         }
         if (checkConnection(getContext())) {
             Retrofit retrofit = new Retrofit.Builder()
