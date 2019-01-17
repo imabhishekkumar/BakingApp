@@ -1,6 +1,8 @@
 # Baking App
 
 ![](https://github.com/imabhishekkumar/BakingApp/blob/master/Baking%20App.jpg?raw=true)
+![](https://github.com/imabhishekkumar/BakingApp/blob/master/Tablet.jpg?raw=true)
+
 
 # In this App
 - MediaPlayer/Exoplayer to display videos.
